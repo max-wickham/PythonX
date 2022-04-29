@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from node import Node
-from class_types import Type
 
 class Expression(Node):
     ...
@@ -8,10 +7,9 @@ class Expression(Node):
 @dataclass
 class Variable(Expression):
     name : str
-    object_type : str
 
     def print_cpp(self):
-        print(" ", name, " ")
+        print(" ", self.name, " ")
 
     
 class BinaryExpression(Expression):
@@ -24,7 +22,42 @@ class Addition(Expression):
     '''
     left_expression : Expression
     right_expression : Expression
-    expression_type : Type
+    expression_type : 'Type'
 
     def print_cpp(self):
         expression_type.print_addition(left_expression, right_expression)
+
+@dataclass
+class FunctionCall(Expression):
+
+    expression_list : list[Expression]
+
+    def print_cpp(self):
+        ...
+
+@dataclass
+class PrintCall(FunctionCall):
+
+    expression_list : list[Expression]
+
+    def print_cpp(self):
+        print('print.attr("__call__")(')
+        self.seperated_print(self.expression_list)
+        print(')')
+
+@dataclass
+class NumberConstant(Expression):
+
+    value : float
+
+    def print_cpp(self):
+        print(self.value)
+        
+@dataclass 
+class Return(Expression):
+
+    expression : Expression
+
+    def print_cpp(self):
+        print('return')
+        self.expression.print_cpp()

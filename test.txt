@@ -1,0 +1,22 @@
+class
+Test
+{
+
+public:
+
+
+
+int
+getX
+(
+(
+{
+<class 'int'>
+x
+;
+return
+  x  
+;
+}
+
+};

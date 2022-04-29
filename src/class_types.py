@@ -1,8 +1,11 @@
 from node import Node
 from information import PythonXClassInformation
 from expression import Expression
+from dataclasses import dataclass
 
 class Type(Node):
+
+    name : str
 
     def print_addition(left_expression : Expression, right_expression : Expression): ...
 
